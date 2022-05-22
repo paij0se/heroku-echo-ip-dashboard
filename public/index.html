@@ -3,32 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css" />
     <title>ip</title>
   </head>
   <body>
-    <script charset="utf-8">
-      const json = fetch(`https://${location.hostname}/ip`);
-      json
-        .then((r) => {
-          return r.json();
-        })
-        .then((ip) => {
-          console.log(ip);
-          document.getElementById("ip").innerHTML = ip.query;
-          document.getElementById("city").innerHTML = ip.city;
-          document.getElementById("country").innerHTML = ip.country;
-          document.title = ip.country;
-          document.getElementById(
-            "flag"
-          ).src = `https://countryflagsapi.com/png/${ip.country}`;
-        });
-    </script>
-    <style>
-      body {
-        background-color: #ffb5da;
-      }
-    </style>
     <div align="center">
+      <h1>Information</h1>
       <div id="ip"></div>
       <div id="city"></div>
       <div id="country"></div>
