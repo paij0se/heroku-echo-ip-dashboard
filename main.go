@@ -1,44 +1,26 @@
 package main
 
 import (
-	"encoding/json"
-	"io/ioutil"
 	"log"
-	"net/http"
 	"os"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	"github.com/paij0se/ip/src/controllers"
 )
-
-type Ip struct {
-	Country string
-	City    string
-	Lat     float64
-	Lon     float64
-	Isp     string
-	Query   string
-}
 
 func main() {
 	e := echo.New()
-	e.GET("/ip", func(c echo.Context) error {
-		ip := c.RealIP()
-		req, err := http.Get("http://ip-api.com/json/" + ip)
-		if err != nil {
-			log.Fatal(err)
-		}
-		body, err := ioutil.ReadAll(req.Body)
-		var ipUser Ip
-		json.Unmarshal(body, &ipUser)
-		return json.NewEncoder(c.Response()).Encode(map[string]string{"country": ipUser.Country, "query": ipUser.Query, "isp": ipUser.Isp, "city": ipUser.City})
-	})
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
 		AllowOrigins: []string{"*"},
 		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
 	}))
 
-	e.Static("/", "public")
+	e.Static("/", "src/public")
+	e.POST("/u", controllers.UpdateData)
+	e.GET("/ip", controllers.GetIp)
+	e.GET("/ip/all", controllers.ReturnIps)
+
 	port := os.Getenv("PORT")
 
 	if port == "" {
