@@ -2,33 +2,28 @@ package database
 
 import (
 	"database/sql"
+	"encoding/json"
 	"log"
 
 	"github.com/labstack/echo/v4"
 	_ "github.com/lib/pq"
 )
 
-func Rows(db *sql.DB, c echo.Context) {
-	rows, err := db.Query("SELECT * FROM ip")
+func Rows(db *sql.DB, c echo.Context) (err error) {
+	rows, err := db.Query("SELECT country FROM ip")
 	if err != nil {
-		log.Println(err.Error())
+		log.Fatal(err)
 	}
-	defer rows.Close()
 	for rows.Next() {
-		var country, city, isp, query string
-		var lat, lon float64
-		err = rows.Scan(&country, &city, &lat, &lon, &isp, &query)
+		var country string
+		err = rows.Scan(&country)
 		if err != nil {
 			log.Println(err.Error())
 		}
 		if err != nil {
 			log.Println(err.Error())
 		}
-		c.JSON(200, map[string]interface{}{
-			"country": country,
-			"city":    city,
-			"ip":      query,
-		})
-
+		json.NewEncoder(c.Response()).Encode(country)
 	}
+	return rows.Close()
 }

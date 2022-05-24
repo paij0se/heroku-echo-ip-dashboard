@@ -2,13 +2,12 @@
 body {
   background-color: #3f4549;
 }
-#ip,
-#city,
-#country,
+
 h1 {
   color: #fff;
   font-family: "Cascadia Code", sans-serif;
 }
+
 img {
   width: auto;
   height: auto;

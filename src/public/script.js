@@ -4,12 +4,32 @@ json
     return r.json();
   })
   .then((ip) => {
-    console.log(ip);
     document.getElementById("ip").innerHTML = ip.query;
-    document.getElementById("city").innerHTML = ip.city;
-    document.getElementById("country").innerHTML = ip.country;
-    document.title = ip.country;
-    document.getElementById(
-      "flag"
-    ).src = `https://countryflagsapi.com/png/${ip.country}`;
+  });
+
+const countries = fetch(`https://${location.hostname}/ip/all`);
+countries
+  .then((r) => {
+    return r.text();
+  })
+  .then((countries) => {
+    const countryCount = countries.split("\n").reduce((acc, country) => {
+      if (country in acc) {
+        acc[country]++;
+      } else {
+        acc[country] = 1;
+      }
+      return acc;
+    }, {});
+    const sortedCountries = Object.keys(countryCount).sort((a, b) => {
+      return countryCount[b] - countryCount[a];
+    });
+    const countryList = sortedCountries.reduce((acc, country) => {
+      acc += `${country}: ${countryCount[country]}\n`;
+      return acc;
+    }, "");
+
+    document.getElementById("countries").innerHTML = countryList;
+    document.getElementById("countries").style.fontFamily = "Cascadia Code";
+    document.getElementById("countries").style.color = "white";
   });

@@ -9,8 +9,8 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
-	"github.com/paij0se/ip/src/database"
-	"github.com/paij0se/ip/src/interfaces"
+	"github.com/paij0se/heroku-echo-ip-dashboard/src/database"
+	"github.com/paij0se/heroku-echo-ip-dashboard/src/interfaces"
 )
 
 func Post(c echo.Context, Country string, City string, Lat float64, Lon float64, Isp string, Query string) error {
@@ -51,16 +51,6 @@ func GetIp(c echo.Context) error {
 	body, _ := ioutil.ReadAll(req.Body)
 	var ipUser interfaces.Ip
 	json.Unmarshal(body, &ipUser)
-	/*
-		{
-			"Country": "United States",
-			"City": "New York",
-			"Lat": 40.7128,
-			"Lon": -74.0060,
-			"Isp": "Verizon",
-			"Query": "182.255.1.2
-		}
-	*/
 	Post(c, ipUser.Country, ipUser.City, ipUser.Lat, ipUser.Lon, ipUser.Isp, ip)
 	return json.NewEncoder(c.Response()).Encode(map[string]string{"country": ipUser.Country, "query": ipUser.Query, "isp": ipUser.Isp, "city": ipUser.City})
 }

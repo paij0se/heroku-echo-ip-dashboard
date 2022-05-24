@@ -1,4 +1,4 @@
-package main
+package HerokuEchoIpDashboard
 
 import (
 	"log"
@@ -6,17 +6,17 @@ import (
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	"github.com/paij0se/ip/src/controllers"
+	"github.com/paij0se/heroku-echo-ip-dashboard/src/controllers"
 )
 
-func main() {
+func HerokuEchoIpDashboard(portn string) {
 	e := echo.New()
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
-		AllowOrigins: []string{"*"},
+		AllowOrigins: []string{"*"}, // If you want restrict access to some domains, add them here
 		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
 	}))
 
-	e.Static("/", "src/public")
+	e.Static("/dashboard", "src/public") // Also you can change the path of the static files
 	e.POST("/u", controllers.UpdateData)
 	e.GET("/ip", controllers.GetIp)
 	e.GET("/ip/all", controllers.ReturnIps)
@@ -24,9 +24,9 @@ func main() {
 	port := os.Getenv("PORT")
 
 	if port == "" {
-		log.Println("The port to use is not declared, using port 8080.")
+		log.Println("The port to use is not declared, using port" + portn)
 
-		port = "8080"
+		port = portn
 	}
 	e.Logger.Fatal(e.Start(":" + port))
 

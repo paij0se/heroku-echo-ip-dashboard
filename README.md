@@ -14,3 +14,29 @@ Database has been created and is available
 Use heroku addons:docs heroku-postgresql to view documentation
 ```
 
+<h1>Usage</h1>
+
+```go
+    import (
+        HerokuEchoIpDashboard "github.com/paij0se/ip/src"
+        // .....
+    )
+   
+    func main(){
+        //...
+        // Your echo app
+        //...
+        port, ok := os.LookupEnv("PORT")
+
+        if !ok {
+            port = "5000"
+        }
+        HerokuEchoIpDashboard.HerokuEchoIpDashboard(port) // <---- Put the port here
+        fmt.Printf("server on port: %s", port)
+        e.Logger.Fatal(e.Start(":" + port)) 
+    }
+    
+
+```
+
+<h1>Test everything with `go test`</h1>

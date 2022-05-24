@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"log"
 
-	"github.com/paij0se/ip/src/interfaces"
+	"github.com/paij0se/heroku-echo-ip-dashboard/src/interfaces"
 )
 
 func Query(db *sql.DB, API *interfaces.Ip) (err error) {
