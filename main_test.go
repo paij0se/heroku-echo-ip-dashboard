@@ -8,6 +8,7 @@ import (
 
 	"github.com/labstack/echo/v4"
 	HerokuEchoIpDashboard "github.com/paij0se/heroku-echo-ip-dashboard/src"
+	re "github.com/paij0se/heroku-echo-ip-dashboard/src/controllers"
 )
 
 func Test(testing *testing.T) {
@@ -15,9 +16,10 @@ func Test(testing *testing.T) {
 	HerokuEchoIpDashboard.HerokuEchoIpDashboard(e)
 
 	e.GET("/", func(c echo.Context) error {
-		go HerokuEchoIpDashboard.NumberOfTimesToCount(c)
+		re.Requester(c.Scheme() + "://" + c.Request().Host)
 		return c.String(http.StatusOK, "Hello, World!")
 	})
+
 	port := os.Getenv("PORT")
 
 	if port == "" {

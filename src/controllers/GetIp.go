@@ -42,6 +42,20 @@ func ReturnIps(c echo.Context) error {
 	database.Rows(db, c)
 	return nil
 }
+
+/*
+This little function is going to make a get request to your-app.com/ip
+and return the ip of the user And insert it in the database
+*/
+func Requester(url string) {
+	req, err := http.Get(url + "/ip")
+	if err != nil {
+		log.Fatal(err)
+	}
+	body, _ := ioutil.ReadAll(req.Body)
+	log.Println(string(body))
+}
+
 func GetIp(c echo.Context) error {
 	ip := c.RealIP()
 	req, err := http.Get("http://ip-api.com/json/" + ip)

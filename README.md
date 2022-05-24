@@ -1,4 +1,3 @@
-
 <img src="https://media.discordapp.net/attachments/950041049458438164/978468065501138964/Screenshot_from_2022-05-23_20-22-01.png?width=608&height=402"/>
 
 <h1>Steps</h1>
@@ -18,34 +17,40 @@ Use heroku addons:docs heroku-postgresql to view documentation
 <h1>Usage</h1>
 
 ```go
-    import (
-        HerokuEchoIpDashboard "github.com/paij0se/heroku-echo-ip-dashboard/src"
-        // .....
-    )
-   
-    func main(){
-        //...
-        // Your echo app
-        //...
-        e := echo.New()
-        HerokuEchoIpDashboard.HerokuEchoIpDashboard(e) // initialize the dashboard with the e type.
+package main
 
-        e.GET("/", func(c echo.Context) error {
-            go HerokuEchoIpDashboard.NumberOfTimesToCount(c) // Put this on your main route.
-            // this is going to count each request.
-            // Note: You can used it without a go routine.
-            return c.String(http.StatusOK, "Hello, World!")
-        })
-        port := os.Getenv("PORT")
+import (
+	"log"
+	"os"
+	"testing"
 
-        if port == "" {
-            log.Println("The port to use is not declared, using port 8080")
+	"github.com/labstack/echo/v4"
+	HerokuEchoIpDashboard "github.com/paij0se/heroku-echo-ip-dashboard/src"
+	re "github.com/paij0se/heroku-echo-ip-dashboard/src/controllers"
+)
 
-            port = "8080"
-        }
-        e.Logger.Fatal(e.Start(":" + port))
-    }
-    
+func main() {
+	e := echo.New()
+	HerokuEchoIpDashboard.HerokuEchoIpDashboard(e) // init the dashboard
+
+	e.GET("/", func(c echo.Context) error {
+		re.Requester(c.Scheme() + "://" + c.Request().Host) // This is going to count all the visitors of "/"
+		//return c.File("public/index.html") // Static file
+        
+		//return c.String(http.StatusOK, "Hello, World!") // a hello world
+        
+	})
+
+	port := os.Getenv("PORT")
+
+	if port == "" {
+		log.Println("The port to use is not declared, using port 8080")
+
+		port = "8080"
+	}
+	e.Logger.Fatal(e.Start(":" + port))
+
+}
 
 ```
 
@@ -58,9 +63,17 @@ Use heroku addons:docs heroku-postgresql to view documentation
 
 ```
 
+<h1>Routes</h1>
+
+```go
+	e.Static("/dashboard", "src/public") // The fronted of dashboard
+	e.POST("/u", controllers.UpdateData) // the route where it post the ip
+	e.GET("/ip", controllers.GetIp) // the route of where you get the current ip
+	e.GET("/ip/all", controllers.ReturnIps) // all the data of the database
+```
+
 <h1>TODO</h1>
 
 - [ ] Authentication
 
 - [ ] A better fronted
-
