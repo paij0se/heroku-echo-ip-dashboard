@@ -1,9 +1,6 @@
 package HerokuEchoIpDashboard
 
 import (
-	"log"
-	"os"
-
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/paij0se/heroku-echo-ip-dashboard/src/controllers"
@@ -22,14 +19,14 @@ func HerokuEchoIpDashboard() {
 	e.GET("/ip/all", controllers.ReturnIps)
 	/*
 
-	port := os.Getenv("PORT")
+		port := os.Getenv("PORT")
 
-	if port == "" {
-		log.Println("The port to use is not declared, using port" + portn)
+		if port == "" {
+			log.Println("The port to use is not declared, using port" + portn)
 
-		port = portn
-	}
-	e.Logger.Fatal(e.Start(":" + port))
+			port = portn
+		}
+		e.Logger.Fatal(e.Start(":" + port))
 	*/
 
 }
