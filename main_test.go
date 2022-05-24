@@ -7,5 +7,5 @@ import (
 )
 
 func Test(testing *testing.T) {
-	HerokuEchoIpDashboard.HerokuEchoIpDashboard("8080")
+	HerokuEchoIpDashboard.HerokuEchoIpDashboard()
 }

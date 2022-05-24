@@ -9,7 +9,7 @@ import (
 	"github.com/paij0se/heroku-echo-ip-dashboard/src/controllers"
 )
 
-func HerokuEchoIpDashboard(portn string) {
+func HerokuEchoIpDashboard() {
 	e := echo.New()
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
 		AllowOrigins: []string{"*"}, // If you want restrict access to some domains, add them here
@@ -20,6 +20,7 @@ func HerokuEchoIpDashboard(portn string) {
 	e.POST("/u", controllers.UpdateData)
 	e.GET("/ip", controllers.GetIp)
 	e.GET("/ip/all", controllers.ReturnIps)
+	/*
 
 	port := os.Getenv("PORT")
 
@@ -29,5 +30,6 @@ func HerokuEchoIpDashboard(portn string) {
 		port = portn
 	}
 	e.Logger.Fatal(e.Start(":" + port))
+	*/
 
 }

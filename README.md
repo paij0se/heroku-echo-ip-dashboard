@@ -18,7 +18,7 @@ Use heroku addons:docs heroku-postgresql to view documentation
 
 ```go
     import (
-        HerokuEchoIpDashboard "github.com/paij0se/ip/src"
+        HerokuEchoIpDashboard "github.com/paij0se/heroku-echo-ip-dashboard/src"
         // .....
     )
    
@@ -31,7 +31,7 @@ Use heroku addons:docs heroku-postgresql to view documentation
         if !ok {
             port = "5000"
         }
-        HerokuEchoIpDashboard.HerokuEchoIpDashboard(port) // <---- Put the port here
+        HerokuEchoIpDashboard.HerokuEchoIpDashboard() // The dashboard
         fmt.Printf("server on port: %s", port)
         e.Logger.Fatal(e.Start(":" + port)) 
     }
