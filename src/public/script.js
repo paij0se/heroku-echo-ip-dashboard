@@ -3,9 +3,7 @@ json
   .then((r) => {
     return r.json();
   })
-  .then((ip) => {
-    document.getElementById("ip").innerHTML = ip.query;
-  });
+  .then((_) => {});
 
 const countries = fetch(`https://${location.hostname}/ip/all`);
 countries
