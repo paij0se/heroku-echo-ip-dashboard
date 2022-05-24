@@ -54,6 +54,8 @@ func main() {
 
 ```
 
+Note: The static files are serving in "herokudashboard/herokudashboard/public"
+
 <h1>Testing</h1>
 
 - Test everything with Linux/MacOS
