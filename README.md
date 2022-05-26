@@ -69,7 +69,7 @@ Note: The static files are serving in "herokudashboard/herokudashboard/public"
 
 ```go
 	e.Static("/dashboard", "src/public") // The fronted of dashboard
-	e.POST("/u", controllers.UpdateData) // the route where it post the ip
+	e.POST("/ip/update", controllers.UpdateData) // the route where it post the ip
 	e.GET("/ip", controllers.GetIp) // the route of where you get the current ip
 	e.GET("/ip/all", controllers.ReturnIps) // all the data of the database
 ```

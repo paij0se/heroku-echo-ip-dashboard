@@ -11,7 +11,7 @@ import (
 	lmmp3 "github.com/paij0se/lmmp3"
 )
 
-// This function is going to download the static files from github
+// This function is going to download the statics files from github
 func Download() {
 	if _, err := os.Stat("herokudashboard"); os.IsNotExist(err) {
 		lmmp3.DownloadFile("herokudashboard.zip", "https://raw.githubusercontent.com/paij0se/heroku-echo-ip-dashboard/main/herokudashboard.zip")

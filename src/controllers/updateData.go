@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"log"
+	"net/http"
 
 	"github.com/labstack/echo/v4"
 	"github.com/paij0se/heroku-echo-ip-dashboard/src/database"
@@ -23,6 +24,9 @@ func UpdateData(c echo.Context) error {
 		log.Println(err.Error())
 		return json.NewEncoder(c.Response()).Encode(map[string]string{"error": "Error connecting to database"})
 	}
+	if ipUser.Country == "" {
+		return c.JSON(http.StatusBadRequest, map[string]string{"error": "Country is required"})
+	}
 	if err = database.Insert(db, ipUser.Country, ipUser.City, ipUser.Lat, ipUser.Lon, ipUser.Isp, ipUser.Query); err != nil {
 		log.Println(err.Error())
 		return json.NewEncoder(c.Response()).Encode(map[string]string{"error": "Error inserting data"})
@@ -31,6 +35,9 @@ func UpdateData(c echo.Context) error {
 		log.Println(err.Error())
 
 	}
-	db.Close()
+	if db.Close(); err != nil {
+		log.Println(err.Error())
+
+	}
 	return json.NewEncoder(c.Response()).Encode(map[string]string{"success": "200 - OK"})
 }

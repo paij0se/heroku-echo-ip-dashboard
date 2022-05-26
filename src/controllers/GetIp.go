@@ -23,7 +23,7 @@ func Post(c echo.Context, Country string, City string, Lat float64, Lon float64,
 		"Query":   Query,
 	})
 	fmt.Println(string(postBody))
-	resp, err := http.Post(c.Scheme()+"://"+c.Request().Host+"/u", "application/json", bytes.NewBuffer(postBody))
+	resp, err := http.Post(c.Scheme()+"://"+c.Request().Host+"/ip/update", "application/json", bytes.NewBuffer(postBody))
 	if err != nil {
 		log.Fatalf("An Error Occured %v", err)
 	}
