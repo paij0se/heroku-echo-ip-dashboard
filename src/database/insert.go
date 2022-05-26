@@ -12,6 +12,7 @@ func Insert(db *sql.DB, country string, city string, lat float64, lon float64, i
 		log.Println(err.Error())
 
 	}
+	log.Println("Connections: ", db.Stats().OpenConnections)
 
 	if _, err = insert.Exec(country, city, lat, lon, isp, query); err != nil {
 		log.Println(err.Error())

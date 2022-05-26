@@ -45,7 +45,6 @@ func HerokuEchoIpDashboardWithRateLimiter(e *echo.Echo, RateLimiterMemoryStore f
 
 func HerokuEchoIpDashboard(e *echo.Echo) {
 	download.Download()
-
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
 		AllowOrigins: []string{"*"}, // If you want restrict access to some domains, add them here
 		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},

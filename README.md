@@ -14,6 +14,12 @@ Database has been created and is available
 Use heroku addons:docs heroku-postgresql to view documentation
 ```
 
+<h1>Intallation</h1>
+
+```
+$ go get github.com/paij0se/heroku-echo-ip-dashboard
+```
+
 <h1>Usage</h1>
 
 ```go
@@ -36,9 +42,9 @@ func main() {
 	e.GET("/", func(c echo.Context) error {
 		re.Requester(c.Scheme() + "://" + c.Request().Host) // This is going to count all the visitors of "/"
 		//return c.File("public/index.html") // Static file
-        
+
 		//return c.String(http.StatusOK, "Hello, World!") // a hello world
-        
+
 	})
 
 	port := os.Getenv("PORT")
@@ -68,7 +74,7 @@ Note: The static files are serving in "herokudashboard/herokudashboard/public"
 <h1>Routes</h1>
 
 ```go
-	e.Static("/dashboard", "src/public") // The fronted of dashboard
+	e.Static("/dashboard", "herokudashboard/herokudashboard/public") // The fronted of dashboard
 	e.POST("/ip/update", controllers.UpdateData) // the route where it post the ip
 	e.GET("/ip", controllers.GetIp) // the route of where you get the current ip
 	e.GET("/ip/all", controllers.ReturnIps) // all the data of the database
