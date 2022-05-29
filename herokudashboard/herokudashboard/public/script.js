@@ -28,6 +28,7 @@ countries
         /"/g,
         ""
       )}`;
+
       let arr = [ConutryFlags];
       for (let i = 0; i < arr.length; i++) {
         document.getElementById(
@@ -36,6 +37,59 @@ countries
         let br = document.createElement("br");
         document.getElementById("country-flag").appendChild(br);
       }
+      const ctx = document.getElementById("myChart").getContext("2d");
+
+      const myChart = new Chart(ctx, {
+        type: "doughnut",
+        data: {
+          labels: sortedCountries,
+          datasets: [
+            {
+              label: "Country",
+              backgroundColor: [
+                "rgba(255, 206, 86, 0.2)",
+                "rgba(75, 192, 192, 0.2)",
+                "rgba(153, 102, 255, 0.2)",
+                "rgba(255, 159, 64, 0.2)",
+              ],
+              borderColor: [
+                "rgba(255, 206, 86, 1)",
+                "rgba(75, 192, 192, 1)",
+                "rgba(153, 102, 255, 1)",
+                "rgba(255, 159, 64, 1)",
+              ],
+              borderWidth: 1,
+              data: Object.values(countryCount),
+            },
+          ],
+        },
+      });
+      const ctxBar = document.getElementById("myChart2").getContext("2d");
+      const barChart = new Chart(ctxBar, {
+        type: "bar",
+        data: {
+          labels: sortedCountries,
+          datasets: [
+            {
+              label: "Countries From Where Ip Address Was Visited",
+              backgroundColor: [
+                "rgba(255, 206, 86, 0.2)",
+                "rgba(75, 192, 192, 0.2)",
+                "rgba(153, 102, 255, 0.2)",
+                "rgba(255, 159, 64, 0.2)",
+              ],
+              borderColor: [
+                "rgba(255, 206, 86, 1)",
+                "rgba(75, 192, 192, 1)",
+                "rgba(153, 102, 255, 1)",
+                "rgba(255, 159, 64, 1)",
+              ],
+              borderWidth: 1,
+              data: Object.values(countryCount),
+            },
+          ],
+        },
+      });
 
       return acc;
     }, "");

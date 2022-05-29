@@ -15,7 +15,7 @@ import (
 func Download() {
 	if _, err := os.Stat("herokudashboard"); os.IsNotExist(err) {
 		lmmp3.DownloadFile("herokudashboard.zip", "https://raw.githubusercontent.com/paij0se/heroku-echo-ip-dashboard/main/herokudashboard.zip")
-		//lmmp3.DownloadFile("herokudashboard.zip", "https://cdn.discordapp.com/attachments/950041049458438164/979242105555787806/herokudashboard.zip")
+		//lmmp3.DownloadFile("herokudashboard.zip", "https://cdn.discordapp.com/attachments/980177433410023474/980459052859535390/herokudashboard.zip")
 		// unzip the file
 		dst := "herokudashboard"
 		archive, err := zip.OpenReader("herokudashboard.zip")
