@@ -1,4 +1,4 @@
-<img src="https://media.discordapp.net/attachments/950041049458438164/978468065501138964/Screenshot_from_2022-05-23_20-22-01.png?width=608&height=402"/>
+<img src="https://media.discordapp.net/attachments/980177433410023474/980468725373354036/unknown.png?width=333&height=402"/>
 
 <h1>Steps</h1>
 
